@@ -42,4 +42,9 @@ public class HotelRepositoryImpl implements HotelRepository {
 	public Hotel update(Hotel hotel) {
 		return HotelDboMapper.toHotel(hotelRepository.save(HotelDboMapper.toHotelEntity(hotel)));
 	}
+
+	@Override
+	public Hotel findById(Long id) {
+		return HotelDboMapper.toHotel(hotelRepository.findById(id));
+	}
 }

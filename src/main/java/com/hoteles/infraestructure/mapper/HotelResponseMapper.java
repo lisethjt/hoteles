@@ -11,7 +11,8 @@ public final class HotelResponseMapper {
 				.name(hotel.getName())
 				.category(hotel.getCategory())
 				.available(hotel.getAvailable())
-				.price(hotel.getPrice())				
+				.price(hotel.getPrice())
+				.image(hotel.getImage())
 				.build();
 	}
 }

@@ -15,4 +15,5 @@ public class HotelRequest {
 	private String category;
 	private double price;
 	private String available;
+	private String image;
 }

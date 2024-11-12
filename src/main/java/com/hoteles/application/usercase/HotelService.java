@@ -10,9 +10,11 @@ public interface HotelService {
 
 	List<Hotel> getByName(String name);
 
-	List<Hotel> getAvailables();
+	List<Hotel> getAll();
 
 	void deleteById(Long id);
 
-	Hotel update(Hotel user);
+	Hotel update(Hotel hotel, Long id);
+
+	Hotel findById(Long id);
 }

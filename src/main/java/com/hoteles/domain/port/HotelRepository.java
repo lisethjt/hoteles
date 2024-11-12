@@ -15,4 +15,6 @@ public interface HotelRepository {
 	void deleteById(Long id);
 
 	Hotel update(Hotel user);
+	
+	public Hotel findById(Long id);
 }

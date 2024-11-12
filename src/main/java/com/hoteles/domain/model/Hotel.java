@@ -20,4 +20,5 @@ public class Hotel {
 	private String category;
 	private double price;
 	private String available;
+	private String image;
 }

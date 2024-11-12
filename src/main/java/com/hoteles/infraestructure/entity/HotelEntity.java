@@ -31,4 +31,5 @@ public class HotelEntity {
 	private String available;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Instant createdAt;
+	private String image;
 }

@@ -1,13 +1,15 @@
 package com.hoteles.application.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.hoteles.application.usercase.HotelService;
+import com.hoteles.domain.constant.HotelConstant;
 import com.hoteles.domain.model.Hotel;
 import com.hoteles.domain.port.HotelRepository;
+import com.hoteles.infraestructure.exception.HotelException;
 
 @Service
 public class HotelServiceImpl implements HotelService {
@@ -20,7 +22,12 @@ public class HotelServiceImpl implements HotelService {
 
 	@Override
 	public void deleteById(Long id) {
-		hotelRepository.deleteById(id);
+		Hotel hotelDb = hotelRepository.findById(id);
+		if (hotelDb != null) {
+			hotelRepository.deleteById(id);
+		} else {
+			new HotelException(HttpStatus.BAD_REQUEST, HotelConstant.HOTEL_NOT_FOUND_MESSAGE_ERROR);
+		}
 	}
 
 	@Override
@@ -29,8 +36,15 @@ public class HotelServiceImpl implements HotelService {
 	}
 
 	@Override
-	public Hotel update(Hotel hotel) {
-		return hotelRepository.createHotel(hotel);
+	public Hotel update(Hotel hotel, Long id) {
+		Hotel hotelDb = hotelRepository.findById(id);
+		if (hotelDb != null) {
+			hotelDb.setPrice(hotel.getPrice());
+			hotelDb.setCategory(hotel.getCategory());
+		} else {
+			new HotelException(HttpStatus.BAD_REQUEST, HotelConstant.HOTEL_NOT_FOUND_MESSAGE_ERROR);
+		}
+		return hotelRepository.createHotel(hotelDb);
 	}
 
 	@Override
@@ -39,9 +53,18 @@ public class HotelServiceImpl implements HotelService {
 	}
 
 	@Override
-	public List<Hotel> getAvailables() {
-		return hotelRepository.getAll().stream()
-				.filter(hotel -> hotel.getAvailable().equals("true"))
-				.collect(Collectors.toList());
+	public List<Hotel> getAll() {
+		return hotelRepository.getAll();
 	}
+
+	@Override
+	public Hotel findById(Long id) {
+		return hotelRepository.findById(id);
+	}
+
+//	public List<Hotel> getAll() {
+//		return hotelRepository.getAll().stream()
+//				.filter(hotel -> hotel.getAvailable().equals("true"))
+//				.collect(Collectors.toList());
+//	}
 }

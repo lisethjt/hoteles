@@ -11,6 +11,7 @@ public final class HotelRequestMapper {
 				.category(hotel.getCategory())
 				.available(hotel.getAvailable())
 				.price(hotel.getPrice())
+				.image(hotel.getImage())
 				.build();
 	}
 }
