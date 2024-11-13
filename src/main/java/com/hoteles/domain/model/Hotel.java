@@ -21,4 +21,11 @@ public class Hotel {
 	private double price;
 	private String available;
 	private String image;
+
+	public String getAvailable() {
+		if (available == null)
+			this.available = "false";
+		return available;
+	}
+
 }

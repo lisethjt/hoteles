@@ -32,6 +32,7 @@ public class HotelServiceImpl implements HotelService {
 
 	@Override
 	public Hotel createHotel(Hotel hotel) {
+		hotel.setAvailable("true");
 		return hotelRepository.createHotel(hotel);
 	}
 
@@ -41,6 +42,7 @@ public class HotelServiceImpl implements HotelService {
 		if (hotelDb != null) {
 			hotelDb.setPrice(hotel.getPrice());
 			hotelDb.setCategory(hotel.getCategory());
+			hotelDb.setImage(hotel.getImage());
 		} else {
 			new HotelException(HttpStatus.BAD_REQUEST, HotelConstant.HOTEL_NOT_FOUND_MESSAGE_ERROR);
 		}

@@ -53,4 +53,13 @@ public class HotelController {
 	public void deleteHotel(@PathVariable Long id) {
 		hotelservice.deleteById(id);
 	}
+	
+	@GetMapping(value = "/getAvailable")
+	public List<HotelResponse> getAvailableHotels() {
+		return hotelservice.getAll()
+				.stream()
+				.filter(hotel -> hotel.getAvailable().equals("true"))
+				.map(HotelResponseMapper::toHotelResponse)
+				.collect(Collectors.toList());
+	}
 }
